@@ -12,7 +12,7 @@ angular.module('ngCoffeeApp')
         else
           document.getElementById('inputPwd2').setCustomValidity ''
 
-
+# nb: phone and phonePrefix are outside of object u
 angular.module('ngCoffeeApp')
   .controller 'RegisterCtrl', ($scope, $http) ->
 
@@ -44,14 +44,15 @@ angular.module('ngCoffeeApp')
     # default values
     $scope.u =
       gender: 'M'
-      phonePrefix: '+39'
+      
+    $scope.phonePrefix: '+39'
 
     # submitting function, will do the AJAX
     $scope.mySubmit = ->
       $scope.errors = []
       # Porting fields with 'strange' names
-      $scope.u['mobile-phone-prefix'] = $scope.u.phonePrefix
-      $scope.u['mobile-phone'] = $scope.u.phone
+      $scope.u['mobile-phone-prefix'] = $scope.phonePrefix
+      $scope.u['mobile-phone'] = $scope.phone
       # fix: angular converts 1 to true. I will investigate in future.
       $scope.u.terms = 1
       # console.log 'Submitting'

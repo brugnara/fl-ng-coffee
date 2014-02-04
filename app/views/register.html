@@ -121,7 +121,7 @@
                     <select
                             class="form-control"
                             id="inputPhonePrefix"
-                            ng-model="u.phonePrefix"
+                            ng-model="phonePrefix"
                             ng-options="p.value as p.text for p in phonePrefixes"></select>
                 </div>
             </div>
@@ -134,7 +134,7 @@
                             type="tel"
                             class="form-control"
                             id="inputPhone"
-                            ng-model="u.phone"
+                            ng-model="phone"
                             pattern="[0-9]{9,12}"
                             required>
                 </div>
