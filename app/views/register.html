@@ -10,13 +10,21 @@
 
     <div class="panel-body">
 
-        <form class="form-horizontal">
+        <form class="form-horizontal" name="regForm">
 
             <!-- username -->
             <div class="form-group">
                 <label for="inputUsername" class="col-sm-4 control-label">Username</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="inputUsername" placeholder="Username" ng-model="u.username" required>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="inputUsername"
+                            placeholder="Username"
+                            ng-model="u.username"
+                            pattern="[a-zA-Z\.\-\@]{6,20}"
+                            required>
+                    <span class="help-block">Inserisci dai 6 ai 20 caratteri alfanumerici e/o i caratteri . - @</span>
                 </div>
             </div>
 
@@ -24,7 +32,15 @@
             <div class="form-group">
                 <label for="inputPwd" class="col-sm-4 control-label">Password</label>
                 <div class="col-sm-8">
-                    <input type="password" class="form-control" id="inputPwd" ng-model="u.password1" required>
+                    <input
+                            type="password"
+                            class="form-control"
+                            id="inputPwd"
+                            name="inputPwd"
+                            ng-model="u.password1"
+                            pattern="[a-zA-A\.\-\@\!\_]{6,20}"
+                            required>
+                    <span class="help-block">Inserisci dai 6 ai 20 caratteri alfanumerici e/o i caratteri . - @ ! _</span>
                 </div>
             </div>
 
@@ -32,7 +48,14 @@
             <div class="form-group">
                 <label for="inputPwd2" class="col-sm-4 control-label">Verifica password</label>
                 <div class="col-sm-8">
-                    <input type="password" class="form-control" id="inputPwd2" ng-model="u.password2" required>
+                    <input
+                            type="password"
+                            class="form-control"
+                            id="inputPwd2"
+                            name="inputPwd2"
+                            ng-model="u.password2"
+                            valid-password-c
+                            required>
                 </div>
             </div>
 
