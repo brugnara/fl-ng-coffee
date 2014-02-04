@@ -54,14 +54,14 @@ angular.module('ngCoffeeApp')
       $scope.u['mobile-phone'] = $scope.u.phone
       # fix: angular converts 1 to true. I will investigate in future.
       $scope.u.terms = 1
-      console.log 'Submitting'
-      console.log JSON.stringify $scope.u
+      # console.log 'Submitting'
+      # console.log JSON.stringify $scope.u
       # transform JSON to query string
       params = $.param $scope.u
-      console.log 'Param query string: ' + params
+      # console.log 'Param query string: ' + params
       $http.jsonp(url + '?' + params + '&' + cbUrl).success (data, status) ->
-        console.log "Got response:"
-        console.log JSON.stringify data
+        # console.log "Got response:"
+        # console.log JSON.stringify data
         # check response # {"status":"ko","errors":{"username":{"param":"username","msg":"Username già utilizzato","value":"ciaociao"}}}
         if data.status is 'ko'
           # fill errors
