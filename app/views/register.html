@@ -175,6 +175,9 @@
 
             <div class="pull-right">
 
+                <!-- info su quanti errori ci sono -->
+                <div ng-show="errors.length">Ci sono <span class="badge">{{ errors.length }}</span> errori.</div>
+
                 <!-- submit -->
                 <button type="submit" class="btn btn-success">Registrati</button>
 
@@ -185,4 +188,9 @@
 
         </form>
     </div>
+</div>
+
+<div class="alert alert-danger" ng-repeat="e in errors">
+    <strong>Errore nel campo {{ e.param }}</strong>:
+    {{ e.message }}
 </div>

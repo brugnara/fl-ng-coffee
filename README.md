@@ -20,6 +20,8 @@ $ npm install && bower install
 $ grunt serve
 ```
 
+Now open a browser at localhost:9000
+
 # How it works
 
 Angular will prepare routing table, setting for the `#/register` destination url, a specific view and a controller.
