@@ -63,7 +63,3 @@ $ python -m SimpleHTTPServer
 
 I didn't used any CDN. I don't know how this application will be tested so I preferred to mantain dependancies with bower.
 Any way, it's possible to configure Grunt to change from bower to CDN. I know that it's possible but I never did.
-
-# Code
-
-T
