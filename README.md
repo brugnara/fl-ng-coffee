@@ -9,6 +9,10 @@ fl-ng-coffee
  - nodejs # at least 0.8
  - npm install -g grunt bower
 
+# Optionally
+
+ - [fl-node](https://github.com/brugnara/fl-node)
+
 # How
 
 ```
@@ -19,13 +23,18 @@ $ grunt serve
 # How it works
 
 Angular will prepare routing table, setting for the `#/register` destination url, a specific view and a controller.
-The register.html view, is a form with html5 fields validation. All parameters are connected to the model with the two-way data
-binding implemented by AngularJS. Changing a value in the form, will apply the value to the model, and vice-versa.
+The register.html view, is a form with html5 fields validation. All parameters are connected to the model `$scope.u`, with the two-way data
+binding implemented by AngularJS. Changing a value in the form, will result in the apply of the value to the model, and vice-versa.
 Every field is checked with a specific pattern and will lock the submit until every pattern will be satisfied.
 You will see that with the first field, **server**, you can choose the destination server. The first choise is "FreeLuna"
 and with this, the application will send data through the JSONP. Selecting "NodeJS", the application will use socket.io to
 send data and will receive an async message when server will terminate the request to the FreeLuna server.
 I didn't implemented a server side data check because it's already implemented in the REST server.
+
+## Warning!
+
+Before being able to send data to NodeJS, you have to start the [node server](https://github.com/brugnara/fl-node)
+because it will provide socket.io.js file required from the frontend.
 
 # No CORS? No problems...
 
@@ -52,5 +61,9 @@ $ python -m SimpleHTTPServer
 
 # CDN
 
-I didn't used any CDN. I didn't know who and how this application will be tested so I preferred to mantain dependancies with bower.
+I didn't used any CDN. I don't know how this application will be tested so I preferred to mantain dependancies with bower.
 Any way, it's possible to configure Grunt to change from bower to CDN. I know that it's possible but I never did.
+
+# Code
+
+T

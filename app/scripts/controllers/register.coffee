@@ -12,7 +12,7 @@ angular.module('ngCoffeeApp')
         else
           document.getElementById('inputPwd2').setCustomValidity ''
 
-# nb: phone and phonePrefix are outside of object u
+# nb: phone and phonePrefix are outside of object $scope.u
 angular.module('ngCoffeeApp')
   .controller 'RegisterCtrl', ($scope, $http) ->
 
@@ -23,6 +23,7 @@ angular.module('ngCoffeeApp')
       socket = io.connect 'http://localhost:8080'
       socket.on 'createResponse', (data) ->
         #console.log 'Got some data: ' + JSON.stringify data
+
         # We need this apply to tell ng to reload the scope!
         $scope.$apply ->
           $scope.checkResponse data
@@ -78,13 +79,16 @@ angular.module('ngCoffeeApp')
     # submitting function, will do the AJAX
     $scope.mySubmit = ->
       $scope.errors = []
+
       # Porting fields with 'strange' names
       $scope.u['mobile-phone-prefix'] = $scope.phonePrefix
       $scope.u['mobile-phone'] = $scope.phone
+
       # fix: angular converts 1 to true. I will investigate in future.
       $scope.u.terms = 1
       # console.log 'Submitting'
       # console.log JSON.stringify $scope.u
+
       # transform JSON to query string
       params = $.param $scope.u
       # console.log 'Param query string: ' + params
