@@ -62,7 +62,6 @@ angular.module('ngCoffeeApp')
     # default values
     $scope.u =
       gender: 'M'
-
     $scope.phonePrefix = '+39'
     $scope.server = 'freeluna'
 
