@@ -19,6 +19,15 @@ angular.module('ngCoffeeApp')
     url = "http://hello.freeluna.it/create"
     cbUrl = "callback=JSON_CALLBACK";
     #url = "http://hello.freeluna.it/create";
+    try
+      socket = io.connect 'http://localhost:8080'
+      socket.on 'createResponse', (data) ->
+        #console.log 'Got some data: ' + JSON.stringify data
+        # We need this apply to tell ng to reload the scope!
+        $scope.$apply ->
+          $scope.checkResponse data
+    catch ex
+      #console.error ex.message
 
     $scope.isRegistered = false
 
@@ -28,6 +37,14 @@ angular.module('ngCoffeeApp')
     ,
       type: 'Femmina'
       value: 'F'
+    ]
+
+    $scope.servers = [
+      type: 'FreeLuna (hello.freeluna.it/create)'
+      value: 'freeluna'
+    ,
+      type: 'NodeJs (SocketIO @ localhost:8080)'
+      value: 'node'
     ]
 
     $scope.phonePrefixes = [ # +39, +49, +41
@@ -44,8 +61,19 @@ angular.module('ngCoffeeApp')
     # default values
     $scope.u =
       gender: 'M'
-      
-    $scope.phonePrefix: '+39'
+
+    $scope.phonePrefix = '+39'
+    $scope.server = 'freeluna'
+
+    # check function
+    $scope.checkResponse = (data) ->
+      # check response # {"status":"ko","errors":{"username":{"param":"username","msg":"Username già utilizzato","value":"ciaociao"}}}
+      if data.status is 'ok'
+        $scope.isRegistered = true
+      else
+        # fill errors
+        $scope.errors.push { message: 'Errore sconosciuto' } if not data.errors
+        $scope.errors.push ({ message: error.msg || 'Errore sconosciuto', param: error.param }) for paramName, error of data?.errors
 
     # submitting function, will do the AJAX
     $scope.mySubmit = ->
@@ -60,13 +88,11 @@ angular.module('ngCoffeeApp')
       # transform JSON to query string
       params = $.param $scope.u
       # console.log 'Param query string: ' + params
-      $http.jsonp(url + '?' + params + '&' + cbUrl).success (data, status) ->
-        # console.log "Got response:"
-        # console.log JSON.stringify data
-        # check response # {"status":"ko","errors":{"username":{"param":"username","msg":"Username già utilizzato","value":"ciaociao"}}}
-        if data.status is 'ko'
-          # fill errors
-          $scope.errors.push { message: 'Errore sconosciuto' } if not data.errors
-          $scope.errors.push ({ message: error.msg || 'Errore sconosciuto', param: error.param }) for paramName, error of data?.errors
-        else
-          $scope.isRegistered = true
+      if $scope.server is 'freeluna'
+        $http.jsonp(url + '?' + params + '&' + cbUrl).success (data, status) ->
+          # console.log "Got response:"
+          # console.log JSON.stringify data
+          $scope.checkResponse data
+      else
+        # emit event socketio!
+        socket.emit 'create', $scope.u

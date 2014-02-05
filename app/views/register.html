@@ -21,6 +21,15 @@
 
         <form class="form-horizontal" name="regForm" ng-submit="mySubmit()">
 
+            <!-- Select destination server -->
+            <div class="form-group">
+                <label for="destinationServer" class="col-sm-4 control-label">Server</label>
+                <div class="col-sm-8">
+                    <select class="form-control" id="destinationServer" ng-model="server" ng-options="s.value as s.type for s in servers"></select>
+                    <span class="help-block">Opzione avanzata: seleziona il server al quale tentare registrazione</span>
+                </div>
+            </div>
+
             <!-- username -->
             <div class="form-group">
                 <label for="inputUsername" class="col-sm-4 control-label">Username</label>
