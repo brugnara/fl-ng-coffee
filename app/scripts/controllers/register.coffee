@@ -18,6 +18,7 @@ angular.module('ngCoffeeApp')
 
     url = "http://hello.freeluna.it/create"
     cbUrl = "callback=JSON_CALLBACK";
+    $scope.errors = []
     #url = "http://hello.freeluna.it/create";
     try
       socket = io.connect 'http://localhost:8080'
@@ -72,7 +73,7 @@ angular.module('ngCoffeeApp')
         $scope.isRegistered = true
       else
         # fill errors
-        $scope.errors.push { message: 'Errore sconosciuto' } if not data.errors
+        $scope.errors.push { message: 'Errore sconosciuto' } if not data?.errors
         $scope.errors.push ({ message: error.msg || 'Errore sconosciuto', param: error.param }) for paramName, error of data?.errors
 
     # submitting function, will do the AJAX
