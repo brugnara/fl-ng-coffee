@@ -69,7 +69,7 @@ angular.module('ngCoffeeApp')
     # check function
     $scope.checkResponse = (data) ->
       # check response # {"status":"ko","errors":{"username":{"param":"username","msg":"Username già utilizzato","value":"ciaociao"}}}
-      if data.status is 'ok'
+      if data?.status is 'ok'
         $scope.isRegistered = true
       else
         # fill errors
